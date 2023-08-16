@@ -288,7 +288,7 @@ impl<'a> SenseHat<'a> {
         // Calculate our waiting time for each frame
         let wait_time = interval.into();
         // Connect to our LED Matrix screen.
-        let mut screen = sensehat_screen::Screen::open("/dev/fb1")?;
+        let mut screen = sensehat_screen::Screen::open("/dev/fb0")?;
         // Get the default `FontCollection`.
         let fonts = sensehat_screen::FontCollection::new();
         // Create a sanitized `FontString`.
