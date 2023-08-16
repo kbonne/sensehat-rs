@@ -69,6 +69,10 @@ use lsm9ds1_dummy as lsm9ds1;
 #[cfg(feature = "led-matrix")]
 use sensehat_screen::color::PixelColor;
 
+
+const FB_DEVICE: &str = "/dev/fb0";
+
+
 /// Represents an orientation from the IMU.
 #[derive(Debug, Copy, Clone)]
 pub struct Orientation {
@@ -288,7 +292,7 @@ impl<'a> SenseHat<'a> {
         // Calculate our waiting time for each frame
         let wait_time = interval.into();
         // Connect to our LED Matrix screen.
-        let mut screen = sensehat_screen::Screen::open("/dev/fb0")?;
+        let mut screen = sensehat_screen::Screen::open(FB_DEVICE)?;
         // Get the default `FontCollection`.
         let fonts = sensehat_screen::FontCollection::new();
         // Create a sanitized `FontString`.
@@ -328,7 +332,7 @@ impl<'a> SenseHat<'a> {
     #[cfg(feature = "led-matrix")]
     pub fn clear(&mut self) -> SenseHatResult<()> {
         // Connect to our LED Matrix screen.
-        let mut screen = sensehat_screen::Screen::open("/dev/fb1")?;
+        let mut screen = sensehat_screen::Screen::open(FB_DEVICE)?;
         // Send a blank image to clear the screen
         const OFF: [u8; 128] = [0x00; 128];
         screen.write_frame(&sensehat_screen::FrameLine::from_slice(&OFF));
