@@ -334,7 +334,7 @@ impl<'a> SenseHat<'a> {
         // Connect to our LED Matrix screen.
         let mut screen = sensehat_screen::Screen::open(FB_DEVICE)?;
         // Send a blank image to clear the screen
-        const OFF: [u8; 128] = [0x00; 128];
+        const OFF: [u8; 128] = [0xFF; 128];
         screen.write_frame(&sensehat_screen::FrameLine::from_slice(&OFF));
         Ok(())
     }
